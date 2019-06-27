@@ -80,6 +80,104 @@ void ShellSort(int a[],int len){
         }
 }
 
+//归并排序 迭代版
+//返回两数的中较小的数
+int min(int x,int y){
+    return x<y?x:y;
+}
+
+//归并排序
+void MergeSort(int arr[],int len){
+    int *a=arr;
+    int *b =(int*)malloc(len* sizeof(int));
+    int seg,start;
+    for(seg = 1;seg<len;seg+=seg) {
+        for (start = 0; start < len; start += seg * 2) {
+            int low = start, mid = min(start + seg, len), high = min(start + seg * 2, len);
+            int k = low;
+            int start1 = low, end1 = mid;
+            int start2 = mid, end2 = high;
+            while (start1 < end1 && start2 < end2)
+                b[k++] = a[start1] < a[start2] ? a[start1++] : a[start2++];
+            while (start1 < end1)
+                b[k++] = a[start1++];
+            while (start2 < end2)
+                b[k++] = a[start2++];
+        }
+        int *temp = a;
+        a = b;
+        b = temp;
+    }
+    //排序完成，将b指针指向a数组，并释放b数组
+    if (a!=arr){
+        int i;
+        for(i=0;i<len;i++)
+            b[i]=a[i];
+        b=a;
+    }
+    free(b);
+
+}
+
+//归并排序，递归版
+void MergeSort2(int arr[],int reg[],int start,int end){
+    if(start>=end)
+        return;
+    int len = end-start,mid=(len>>1)+start;
+    int start1 = start,end1=mid;
+    int start2=mid+1,end2=end;
+    MergeSort2(arr,reg,start1,end1);
+    MergeSort2(arr,reg,start2,end2);
+    int k = start;
+    while (start1<=end1 && start2<=end2)
+        reg[k++] = arr[start1]<arr[start2]?arr[start1++]:arr[start2++];
+    while(start1<=end1)
+        reg[k++]=arr[start1++];
+    while(start2<=end2)
+        reg[k++]=arr[start2++];
+    for(k=start;k<=end;k++)
+        arr[k]=reg[k];
+}
+
+void merge_sort(int arr[],const int len){
+    int reg[len];
+    MergeSort2(arr,reg,0,len-1);
+}
+
+//快速排序算法 递归法
+void swap(int *x,int *y){
+    int t=*x;
+    *x=*y;
+    *y=t;
+}
+
+void QuickSort(int a[],int start,int end){
+    if(start>=end)
+        return;
+    int base = a[end];
+    int left = start,right = end-1;
+    while(left<right){
+        //从左到右找到第一个比base大的数
+        while(a[left]<base&&left<right)
+            left++;
+        while (a[right]>=base&&left<right)//从右向左找到第一个比base小的数
+            right--;
+        swap(&a[left],&a[right]);//交换两者
+    }
+    //若找到左侧有比base大的序列，交换base与left
+    if(a[left]>=a[end])
+        swap(&a[left],&a[end]);
+    else
+        left++;
+    if(left)
+        QuickSort(a,start,left-1);
+    QuickSort(a,left+1,end);
+}
+
+void quick_sort(int a[],int len){
+    QuickSort(a,0,len-1);
+}
+
 
 
 int main() {
@@ -90,7 +188,10 @@ int main() {
 //    AdvanceBubbleSort(a,len);
 //    SelectSort(a,len);
 //    InsertSort(a,len);
-    ShellSort(a,len);
+//    ShellSort(a,len);
+//    MergeSort(a,len);
+//    merge_sort(a,len);
+    quick_sort(a,len);
     for (auto x:a){
         cout<<x<<' ';
     }
