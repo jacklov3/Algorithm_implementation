@@ -179,10 +179,56 @@ void quick_sort(int a[],int len){
 }
 
 
+//堆排序
+//建立大顶堆
+void max_heapify(int a[],int start,int end){
+    int parent = start;
+    int son = parent*2+1;
+    while(son<=end){
+        if(son+1<=end&&a[son]<a[son+1])//选择子节点中较大的点
+            son++;
+        if(a[parent]>a[son])
+            return;
+        else{
+            swap(&a[parent],&a[son]);
+            parent=son;
+            son=parent*2+1;
+        }
+    }
+}
+
+void heap_sort(int a[],int len){
+    int i;
+    for (i = len/2-1; i >=0; i--) {
+        max_heapify(a,i,len-1);//调整为大顶堆
+    }
+    for(i=len-1;i>0;i--){
+        swap(&a[0],&a[i]);
+        max_heapify(a,0,i-1);
+    }
+}
+
+
+//计数排序
+void CountingSort(int *a,int *sorted_a,int n){
+    //申请数组可以存放100个整形
+    int *count_arr = (int *)malloc(sizeof(int)*100);
+    for(int k=0;k<100;k++)
+        count_arr[k]=0;
+    for(int i=0;i<n;i++)
+        count_arr[a[i]]++;
+    for(int k=1;k<100;k++)
+        count_arr[k] +=count_arr[k-1];
+    for(int j=n;j>0;j--)
+        sorted_a[--count_arr[a[j-1]]]=a[j-1];
+    free(count_arr);
+}
+
+
 
 int main() {
     int a[]={10,9,8,7,6,5,4,3,2,1};
-    int b[]={1,2,3,4,5,6,7,8,9,10};
+    int b[]={9,8,7,6,5,4,3,2,1,10};
     int len = sizeof(a)/ sizeof(int);
     //BubbleSort(a,len);
 //    AdvanceBubbleSort(a,len);
@@ -191,10 +237,28 @@ int main() {
 //    ShellSort(a,len);
 //    MergeSort(a,len);
 //    merge_sort(a,len);
-    quick_sort(a,len);
+//    quick_sort(b,len);
+//    heap_sort(b,len);
     for (auto x:a){
         cout<<x<<' ';
     }
+
+    int n=10;
+    int *arr=(int *)malloc(sizeof(int)*n);
+    int *sorted_arr = (int *)malloc(sizeof(int)*n);
+    srand(time(0));
+    for(int i=0;i<n;i++)
+        arr[i]=rand()%100;
+    cout<<"随机初始化数组"<<endl;
+    for(int i=0;i<n;i++)
+        cout<<arr[i]<<endl;
+    //记数排序
+    CountingSort(arr,sorted_arr,n);
+    cout<<"已排序数组"<<endl;
+    for(int i=0;i<n;i++)
+        cout<<sorted_arr[i]<<endl;
+    free(arr);
+    free(sorted_arr);
     return 0;
 
 }
