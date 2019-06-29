@@ -50,14 +50,15 @@ ListNode* Merge(ListNode *head1,ListNode *head2){
     return dummyNode.mNext;
 }
 
-void BucketSort(int n,int arr[]){
-    vector<ListNode*> buckets(BUCKET_NUM,(ListNode*)(0));
-    for(int i = 0;i<n;++i){
-        int index = arr[i]/BUCKET_NUM;
+void BucketSort(int n,int arr[]) {
+    vector<ListNode *> buckets(BUCKET_NUM, (ListNode *) (0));
+    for (int i = 0; i < n; ++i) {
+        int index = arr[i] / BUCKET_NUM;
         ListNode *head = buckets.at(index);
-        buckets.at(index) = insert(head,arr[i]);
+        buckets.at(index) = insert(head, arr[i]);
     }
     ListNode *head = buckets.at(0);
-    for(int i=1;i<BUCKET_NUM;++i)
-        head = Merge(head,buckets.at(i));
+    for (int i = 1; i < BUCKET_NUM; ++i)
+        head = Merge(head, buckets.at(i));
 
+}
