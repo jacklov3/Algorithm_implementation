@@ -18,7 +18,6 @@ typedef int ElemType;
 struct Node {
     ElemType data;//数据域
     struct Node *next;//指针域
-
 };
 typedef struct Node *LinkList;//定义Node结构体指针的别名
 
