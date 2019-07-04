@@ -1,6 +1,19 @@
 #include <iostream>
 using namespace std;
-
+void bubble_sort(int a[],int n){
+    bool changed=true;
+    for(int i=n-1;i>0 && changed;i--){
+        changed =false;
+        for(int j=0;j<i;j++){
+            if(a[j]>a[j+1]){
+                int temp = a[j];
+                a[j]=a[j+1];
+                a[j+1]=temp;
+                changed=true;
+            }
+        }
+    }
+}
 
 //冒泡排序 事件复杂度：O(n^2)
 void BubbleSort(int a[],int len){
@@ -239,26 +252,27 @@ int main() {
 //    merge_sort(a,len);
 //    quick_sort(b,len);
 //    heap_sort(b,len);
+    bubble_sort(a,len);
     for (auto x:a){
         cout<<x<<' ';
     }
-
-    int n=10;
-    int *arr=(int *)malloc(sizeof(int)*n);
-    int *sorted_arr = (int *)malloc(sizeof(int)*n);
-    srand(time(0));
-    for(int i=0;i<n;i++)
-        arr[i]=rand()%100;
-    cout<<"随机初始化数组"<<endl;
-    for(int i=0;i<n;i++)
-        cout<<arr[i]<<endl;
-    //记数排序
-    CountingSort(arr,sorted_arr,n);
-    cout<<"已排序数组"<<endl;
-    for(int i=0;i<n;i++)
-        cout<<sorted_arr[i]<<endl;
-    free(arr);
-    free(sorted_arr);
+//
+//    int n=10;
+//    int *arr=(int *)malloc(sizeof(int)*n);
+//    int *sorted_arr = (int *)malloc(sizeof(int)*n);
+//    srand(time(0));
+//    for(int i=0;i<n;i++)
+//        arr[i]=rand()%100;
+//    cout<<"随机初始化数组"<<endl;
+//    for(int i=0;i<n;i++)
+//        cout<<arr[i]<<endl;
+//    //记数排序
+//    CountingSort(arr,sorted_arr,n);
+//    cout<<"已排序数组"<<endl;
+//    for(int i=0;i<n;i++)
+//        cout<<sorted_arr[i]<<endl;
+//    free(arr);
+//    free(sorted_arr);
     return 0;
 
 }

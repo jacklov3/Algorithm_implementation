@@ -40,7 +40,7 @@ Status GetElem(LinkList L,int i,ElemType *e){//注意该L是一个指针类型,�
 //在单链表的第i个位置插入元素，假设有头节点(方便操作)
 Status ListInsert(LinkList *L,int i,ElemType e){//这里的L是头指针，即指向头节点的指针
     LinkList p,s;//节点指针类型
-    p = *L;//头节点
+    p = *L;//头指针
     int j=1;//计数器
     while(p&&j<i){//寻找第i个节点
         p=p->next;
@@ -116,7 +116,6 @@ Status ClearList(LinkList *L){
     }
     (*L)->next=NULL;
     return OK;
-
 }
 
 
