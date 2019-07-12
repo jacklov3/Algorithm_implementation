@@ -6,6 +6,9 @@
 #define ALGORITHM_STACK_ARRAY_H
 #define MAXSIZE 20
 
+#include "Binary_Tree.h"
+
+
 typedef int SElemType;//别名
 #define OK 1
 #define ERROR 0
@@ -15,9 +18,19 @@ typedef struct {
     int top;//用于指出栈顶位置
 }SqStack;//结构体别名
 
+//初始化栈
+Status InitStack(SqStack **S){
+    *S=(SqStack*)malloc(sizeof(SqStack));
+    if(!(*S)) exit(OVERFLOW);
+    (*S)->top=-1;
+    return OK;
+}
+
+
+
 //进栈
 Status Push(SqStack *S,SElemType e){
-    if(S->top==MAXSIZE-1)//栈满了
+    if(S->top==MAXSIZE-1)//栈满
         return ERROR;
     S->top++;
     S->data[S->top]=e;
