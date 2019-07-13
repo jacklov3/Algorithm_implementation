@@ -5,6 +5,8 @@
 #ifndef ALGORITHM_QUEUE_ARRAY_H
 #define ALGORITHM_QUEUE_ARRAY_H
 
+#define OVERFLOW -2
+
 namespace QueueArray{
 #define MAXSIZE 20
 
@@ -50,6 +52,11 @@ Status DeQueue(SqQueue *Q,QElemType *e){
     return OK;
 }
 
+Status QueueEmpty(SqQueue Q){
+    if(Q.front==Q.rear)
+        return OK;
+    return ERROR;
+}
 
 }
 
