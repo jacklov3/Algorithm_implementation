@@ -54,7 +54,7 @@ typedef struct VertexNode{//顶点表结点
     EdgeNode *firstedge;//边表头指针
 }VertexNode,AdjList[MAXVEX];
 
-//图的结构题
+//图的结构体
 typedef struct {
     AdjList adjList;
     int numVertexes,numEdges;//图中当前顶点数和边数
@@ -104,7 +104,7 @@ void  DFS(MGraph G,int i)
     visited[i]=TRUE;
     printf("%c",G.vexs[i]);//打印顶点
     for(j=0;j<G.numVertexes;j++)
-        if(G.arc[i][j]==1&&!visited[j])
+        if(G.arc[i][j]==1&&!visited[j])//有边且没有访问过
             DFS(G,j);//对未访问的邻接顶点递归调用
 }
 
