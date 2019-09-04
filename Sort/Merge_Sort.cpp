@@ -46,8 +46,31 @@ void Merge_Sort(int arr[],int n){
 
 
 //----------------递归版--------------------//
+void Merge_Sort_recursive(int a[],int b[],int start,int end){
+	if(start>=end)
+		return;//递归退出条件
+	int len=end-start,mid = (len>>1)+start;
+	int start1=start,end1=mid;
+	int start2=mid+1,end2=end;
+	Merge_Sort_recursive(a,b,start1,end1);
+	Merge_Sort_recursive(a,b,start2,end2);
+	int k=start;
+	while(start1<=end1&&start2<=end2){
+		b[k++]=a[start1]<a[start2]?a[start1++]:a[start2++];
+	}
+	while(start1<=end1)
+		b[k++]=a[start1++];
+	while(start2<=end2)
+		b[k++]=a[start2++];
+	for(k=start;k<=end;k++)
+		a[k]=b[k];
+}
 
-
+void Merge_Sort2(int a[],const int len){
+	int b[len];
+	Merge_Sort_recursive(a,b,0,len-1);
+}
+	
 
 
 int main(){
@@ -58,7 +81,7 @@ int main(){
 	for(auto &x:a)
 		cout<<x<<' ';
 	int len=sizeof(a)/sizeof(int);
-	Merge_Sort(a,len);
+	Merge_Sort2(a,len);
 	cout<<endl;
 	for(auto &x:a)
 		cout<<x<<' ';
