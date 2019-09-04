@@ -84,13 +84,14 @@ void InsertSort(int a[],int len){
 //希尔排序，选择步长不断为n/2，最后步长为1时即插入排序 复杂度：O（nlogn)
 void ShellSort(int a[],int len){
     int j;
-    for(int gap = len>>1;gap>0;gap>>=1)
-        for(int i = gap;i<len;i++){
+    for(int gap = len>>1;gap>0;gap>>=1) {
+        for (int i = gap; i < len; i++) {
             int temp = a[i];
-            for(j=i-gap;j>=0&&a[j]>temp;j-=gap)
-                a[j+gap]=a[j];
-            a[j+gap]=temp;
+            for (j = i - gap; j >= 0 && a[j] > temp; j -= gap)
+                a[j + gap] = a[j];
+            a[j + gap] = temp;
         }
+    }
 }
 
 //归并排序 迭代版
