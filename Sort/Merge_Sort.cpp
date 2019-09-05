@@ -53,6 +53,7 @@ void Merge_Sort_recursive(int a[],int b[],int start,int end){
 	int start1=start,end1=mid;
 	int start2=mid+1,end2=end;
 	Merge_Sort_recursive(a,b,start1,end1);
+	//cout<<'<'<<start1<<' '<<end1<<'>'<<endl;
 	Merge_Sort_recursive(a,b,start2,end2);
 	int k=start;
 	while(start1<=end1&&start2<=end2){
