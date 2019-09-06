@@ -2,6 +2,9 @@
 // Created by fish on 2019-06-28.
 //
 
+#include <iostream>
+using namespace std;
+
 //计算列表中最大的位数
 int maxbit(int data[],int n){
     int maxData = data[0];
@@ -44,4 +47,19 @@ void radixsort(int data[],int n){
     }
     delete []tmp;
     delete []count;
+}
+
+int main(){
+    int a[10];
+    srand(unsigned(time(NULL)));
+    for(auto &x:a) {
+        x = rand() % 100;
+        cout<<x<<' ';
+    }
+    cout<<endl;
+    radixsort(a,10);
+    for(auto &x:a)
+        cout<<x<<' ';
+    cout<<endl;
+
 }

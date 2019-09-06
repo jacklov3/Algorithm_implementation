@@ -60,5 +60,22 @@ void BucketSort(int n,int arr[]) {
     ListNode *head = buckets.at(0);
     for (int i = 1; i < BUCKET_NUM; ++i)
         head = Merge(head, buckets.at(i));
+    for(int i=0;i<n;++i){
+        arr[i] = head->mData;
+        head = head->mNext;
+    }
+}
 
+int main(){
+    int a[10];
+    srand(unsigned(time(NULL)));
+    for(auto &x:a)
+        x=rand()%100;
+    for(auto &x:a)
+        cout<<x<<' ';
+    cout<<endl;
+    BucketSort(10,a);
+    for(auto &x:a)
+        cout<<x<<' ';
+    return 0;
 }
