@@ -61,5 +61,4 @@ int main(){
     for(auto &x:a)
         cout<<x<<' ';
     cout<<endl;
-
 }
