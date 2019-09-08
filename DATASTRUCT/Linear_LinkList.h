@@ -38,9 +38,9 @@ Status GetElem(LinkList L,int i,ElemType *e){//注意该L是一个指针类型,�
 }
 
 //在单链表的第i个位置插入元素，假设有头节点(方便操作)
-Status ListInsert(LinkList *L,int i,ElemType e){//这里的L是头指针，即指向头节点的指针
+Status ListInsert(LinkList L,int i,ElemType e){//这里的L是头指针，即指向头节点的指针,由于带头结点，所以不需要传入双重指针
     LinkList p,s;//节点指针类型
-    p = *L;//头指针
+    p = L;//头指针
     int j=1;//计数器
     while(p&&j<i){//寻找第i个节点
         p=p->next;
@@ -61,7 +61,7 @@ Status ListInsert(LinkList *L,int i,ElemType e){//这里的L是头指针，即�
 
 Status ListDelete(LinkList *L,int i,ElemType *e){
     LinkList p,q;//声明节点指针
-    p = *L;//头节点
+    p = *L;//头指针
     int j=1;//计数器
     while (p->next && j<i){
         p=p->next;
@@ -89,6 +89,22 @@ void CreateListHead(LinkList *L,int n){//L是头指针
         (*L)->next=p;//插入到表头
     }
 }
+
+LinkList Create(int n){
+    LinkList L=(LinkList)malloc(sizeof(Node));
+    LinkList p;
+    srand(time(0));
+    L->next= nullptr;
+    for(int i=0;i<n;i++){
+        p=(LinkList)malloc(sizeof(Node));
+        p->data=rand()%100+1;
+        p->next=L->next;
+        L->next=p;
+    }
+
+    return L;
+}
+
 
 //创建链表,尾插入法，随机生成n个元素
 void CreateListTail(LinkList *L,int n){//L是头指针
@@ -118,6 +134,12 @@ Status ClearList(LinkList *L){
     return OK;
 }
 
-
+void PrintList(LinkList L){
+    LinkList current = L;//指向头结点
+    while(current->next!= nullptr){
+        std::cout<<current->next->data<<' ';
+        current=current->next;
+    }
+}
 
 #endif //ALGORITHM_LINEAR_LINKLIST_H

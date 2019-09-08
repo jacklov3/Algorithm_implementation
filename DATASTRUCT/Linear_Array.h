@@ -5,7 +5,6 @@
 #ifndef ALGORITHM_LINEAR_ARRAY_H
 #define ALGORITHM_LINEAR_ARRAY_H
 
-#include <opencl-c.h>
 
 #define MAXSIZE 20 //线性表能存储的最大容量
 #define OK 1
