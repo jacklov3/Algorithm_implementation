@@ -9,7 +9,6 @@ int main(){
     LinkList head= nullptr;//链表的头指针
 //    CreateListHead(&head,10);
     head=Create(10);
-
     PrintList(head);
     cout<<endl;
     if(ListInsert(head,1,100)){
